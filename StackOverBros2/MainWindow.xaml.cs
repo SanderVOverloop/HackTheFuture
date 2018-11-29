@@ -49,9 +49,7 @@ namespace StackOverBros2
 
             answer.name = "sum";
             answer.data = sum.ToString();
-            List<InputValue> values = new List<InputValue>();
             values.Add(answer);
-            Console.WriteLine(response.Data.id);
             Thread.Sleep(10000);
             IRestResponse<PostChallenge> postResponse = apiClass.ApiPost(response.Data.id, id, values);
 
@@ -155,7 +153,7 @@ namespace StackOverBros2
                     default:
                         if (i.name.ToUpper().Contains(planet.ToUpper()))
                         {
-                            sec = sec / int.Parse(i.data);
+                            sec = sec / double.Parse(i.data);
                         }
                         break;
                 }
@@ -176,6 +174,81 @@ namespace StackOverBros2
             btn_complete.IsEnabled = true;
         }
 
+        public void Challenge8()
+        {
+            string id = "6451359698245e2b02bdf79d5f99fe5b";
+
+            IRestResponse<GetChallenge> response = apiClass.ApiGet(id);
+
+            foreach (InputValue i in response.Data.question.inputValues)
+            {
+                answer.name = "decoded";
+                answer.data = BinaryToString(i.data);
+            }
+            values.Add(answer);
+            Console.WriteLine(response.Data.id);
+            Thread.Sleep(10000);
+            IRestResponse<PostChallenge> postResponse = apiClass.ApiPost(response.Data.id, id, values);
+
+
+            challenges.Add(new Challenge { Name = postResponse.Data.identifier, Completion = postResponse.Data.status });
+            list_challenges.ItemsSource = challenges;
+        }
+
+        public static string BinaryToString(string data)
+        {
+            List<Byte> byteList = new List<Byte>();
+
+            for (int i = 0; i < data.Length; i += 8)
+            {
+                byteList.Add(Convert.ToByte(data.Substring(i, 8), 2));
+            }
+            return Encoding.ASCII.GetString(byteList.ToArray());
+        }
+
+
+        public void Challenge16()
+        {
+            string id = "30668de5857704bdf1e620cfb99fef51";
+            IRestResponse<GetChallenge> response = apiClass.ApiGet(id);
+            string roman = "";
+            InputValue i = response.Data.question.inputValues[0];
+            
+            Console.WriteLine(i.data);
+            int x = int.Parse(i.data);
+            roman = ToRoman(x);
+            
+            answer.name = "number";
+            answer.data = roman;
+            values.Add(answer);
+            Thread.Sleep(10000);
+            IRestResponse<PostChallenge> postResponse = apiClass.ApiPost(response.Data.id, id, values);
+
+            challenges.Add(new Challenge { Name = postResponse.Data.identifier, Completion = postResponse.Data.status });
+            list_challenges.ItemsSource = challenges;
+
+        }
+
+        public static string ToRoman(int number)
+        {
+            if ((number < 0) || (number > 3999)) throw new ArgumentOutOfRangeException("insert value betwheen 1 and 3999");
+            if (number < 1) return string.Empty;
+            if (number >= 1000) return "M" + ToRoman(number - 1000);
+            if (number >= 900) return "CM" + ToRoman(number - 900);
+            if (number >= 500) return "D" + ToRoman(number - 500);
+            if (number >= 400) return "CD" + ToRoman(number - 400);
+            if (number >= 100) return "C" + ToRoman(number - 100);
+            if (number >= 90) return "XC" + ToRoman(number - 90);
+            if (number >= 50) return "L" + ToRoman(number - 50);
+            if (number >= 40) return "XL" + ToRoman(number - 40);
+            if (number >= 10) return "X" + ToRoman(number - 10);
+            if (number >= 9) return "IX" + ToRoman(number - 9);
+            if (number >= 5) return "V" + ToRoman(number - 5);
+            if (number >= 4) return "IV" + ToRoman(number - 4);
+            if (number >= 1) return "I" + ToRoman(number - 1);
+            throw new ArgumentOutOfRangeException("something bad happened");
+        }
+
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             CompleteChallenges();
@@ -183,9 +256,14 @@ namespace StackOverBros2
 
         private void CompleteChallenges()
         {
-            //Challenge2();
-            //Thread.Sleep(10000);
+            Challenge2();
+            Thread.Sleep(10000);
             Challenge4();
+            Thread.Sleep(10000);
+            //Challenge5();
+            Challenge8();
+            Thread.Sleep(10000);
+            Challenge16();
         }
 
         public class Challenge
