@@ -10,9 +10,11 @@ namespace StackOverBros2.Challenge_Classes
 {
     class ApiClass
     {
-        public IRestResponse<GetChallenge> ApiGet(int id)
+        public IRestResponse<GetChallenge> ApiGet(string id)
         {
-            var client = new RestClient("htf2018.azurewebsites.net");
+            var baseurl = "http://htf2018.azurewebsites.net/";
+            var client = new RestClient();
+            client.BaseUrl = new System.Uri(baseurl);
 
             var request = new RestRequest(String.Format("challenges/{0}", id), Method.GET);
             request.AddHeader("htf-identification", "ZGJkOWZjOGUtODE4NS00YjEzLWI0OWQtMjUxZmU3MTIwODVk");

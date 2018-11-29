@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RestSharp;
+using StackOverBros2.Challenge_Classes;
+using StackOverBros2.Objects;
 
 namespace StackOverBros2
 {
@@ -26,29 +29,25 @@ namespace StackOverBros2
         }
 
         int x = 2;
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /*private void Button_Click(object sender, RoutedEventArgs e)
         {
-            switch(x)
-            {
-                case 2:
-                    Challenge2();
-                    break;
-                case 4:
-                    Challenge4();
-                    break;
-
-            }
-        }
+            
+        }*/
 
         private void Challenge2()
         {
             string id = "593bc0a2e0dfdc53b239bc2a96ab0fd5";
-
+            ApiClass apiClass = new ApiClass();
+            IRestResponse<GetChallenge> response = apiClass.ApiGet(id);
+            
             int sum = 0;
-            /*foreach(int i in inputValues.data)
+            foreach(InputValue i in response.Data.question.inputValues)
             {
-                sum += i;   
-            }*/
+                sum += int.Parse(i.data);
+                Console.WriteLine(i.data);
+            }
+
+            Console.WriteLine(sum);
 
 
         }
@@ -74,6 +73,20 @@ namespace StackOverBros2
 
                 if (control == 0 && num != 1)
                     Console.Write("{0} ", num);
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            switch (x)
+            {
+                case 2:
+                    Challenge2();
+                    break;
+                case 4:
+                    Challenge4();
+                    break;
+
             }
         }
     }
