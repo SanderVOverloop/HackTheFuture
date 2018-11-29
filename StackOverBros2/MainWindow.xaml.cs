@@ -37,7 +37,6 @@ namespace StackOverBros2
 
         private void Challenge2()
         {
-            btn_complete.IsEnabled = false;
             string id = "593bc0a2e0dfdc53b239bc2a96ab0fd5";
             
             IRestResponse<GetChallenge> response = apiClass.ApiGet(id);
@@ -59,15 +58,11 @@ namespace StackOverBros2
             
             challenges.Add(new Challenge { Name = postResponse.Data.identifier, Completion = postResponse.Data.status });
             list_challenges.ItemsSource = challenges;
-            
-            Thread.Sleep(10000);
-            btn_complete.IsEnabled = true;
 
         }
 
         private void Challenge4()
         {
-            btn_complete.IsEnabled = false;
 
             string id = "7a34919d6dd4c2d9c3f05c6957946b82";
             IRestResponse<GetChallenge> response = apiClass.ApiGet(id);
@@ -80,31 +75,21 @@ namespace StackOverBros2
                 {
                     start = int.Parse(i.data);
                 }
-                else if(i.name == "stop")
+                else if(i.name == "end")
                 {
                     stop = int.Parse(i.data);
                 }
             }
-            for (int num = start; num <= stop; num++)
+            for (int num = start; num < stop; num++)
             {
-                int control = 0;
-
-                for (int i = 2; i <= num / 2; i++)
+                if(IsPrime(num))
                 {
-                    if (num % i == 0)
-                    {
-                        control++;
-                        break;
-                    }
-                }
-
-                if (control == 0 && num != 1)
                     answer.name = "prime";
                     answer.data = num.ToString();
                     values.Add(answer);
+                }
+                    
             }
-
-            
             
             
             Console.WriteLine(response.Data.id);
@@ -115,22 +100,47 @@ namespace StackOverBros2
 
             challenges.Add(new Challenge { Name = postResponse.Data.identifier, Completion = postResponse.Data.status });
             list_challenges.ItemsSource = challenges;
-            Thread.Sleep(10000);
-            btn_complete.IsEnabled = true;
+        }
+
+        public static bool IsPrime(int candidate)
+        {
+                // Test whether the parameter is a prime number.
+                if ((candidate & 1) == 0)
+                {
+                    if (candidate == 2)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                // Note:
+                // ... This version was changed to test the square.
+                // ... Original version tested against the square root.
+                // ... Also we exclude 1 at the end.
+                for (int i = 3; (i * i) <= candidate; i += 2)
+                {
+                    if ((candidate % i) == 0)
+                    {
+                        return false;
+                    }
+                }
+                return candidate != 1;
+            
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            switch (x)
-            {
-                case 2:
-                    Challenge2();
-                    break;
-                case 4:
-                    Challenge4();
-                    break;
+            CompleteChallenges();
+        }
 
-            }
+        private void CompleteChallenges()
+        {
+            //Challenge2();
+            //Thread.Sleep(10000);
+            Challenge4();
         }
 
         public class Challenge
