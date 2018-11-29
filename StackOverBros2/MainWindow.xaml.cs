@@ -127,16 +127,30 @@ namespace StackOverBros2
             IRestResponse<GetChallenge> response = apiClass.ApiGet(id);
 
             //TODO: Code for the Challenge
-            int sum = 0;
+            double sec = 0;
+            string planet = "";
+
             foreach (InputValue i in response.Data.question.inputValues)
             {
-                sum += int.Parse(i.data);
+                switch (i.name)
+                {
+                    case "ageInUniversalSeconds":
+                        sec = double.Parse(i.data);
+                        break;
+                    case "destinationPlanet":
+                        planet = i.data;
+                        break;
+                    default:
+                        if (i.name.ToUpper().Contains(planet.ToUpper()))
+                        {
+                            sec = sec / int.Parse(i.data);
+                        }
+                        break;
+                }
             }
+            answer.name = "ageInYears";
+            answer.data = Math.Round(sec, 2).ToString();
 
-            InputValue answer = new InputValue();
-            answer.name = "sum";
-            answer.data = sum.ToString();
-            List<InputValue> values = new List<InputValue>();
             values.Add(answer);
             Console.WriteLine(response.Data.id);
             Thread.Sleep(10000);
