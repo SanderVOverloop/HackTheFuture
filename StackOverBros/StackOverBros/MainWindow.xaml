@@ -7,6 +7,17 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <ListView HorizontalAlignment="Left" Height="400" Margin="10,10,0,0" VerticalAlignment="Top" Width="425" SelectionChanged="ListView_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" Width="200" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="completion" Width="200" DisplayMemberBinding="{Binding Age}" />
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label Content="StackOverBro's" HorizontalAlignment="Left" Margin="475,10,0,0" VerticalAlignment="Top" Height="34" Width="137" FontSize="18"/>
+        <Button Content="Next Challenge" HorizontalAlignment="Left" Margin="475,73,0,0" VerticalAlignment="Top" Width="106" Height="23" Click="Button_Click"/>
+
     </Grid>
 </Window>
