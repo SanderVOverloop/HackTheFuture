@@ -35,13 +35,22 @@ namespace StackOverBros2.Challenge_Classes
             client.BaseUrl = new System.Uri(baseurl);
 
             var request = new RestRequest(String.Format("challenges/{0}", challengeId), Method.POST);
+            request.AddHeader("Content-type", "application/json");
+            request.AddHeader("htf-identification", "ZGJkOWZjOGUtODE4NS00YjEzLWI0OWQtMjUxZmU3MTIwODVk");
 
             PostObject obj = new PostObject();
             obj.id = id;
             obj.values = values;
 
-            request.AddObject(obj);
-            request.AddHeader("htf-identification", "ZGJkOWZjOGUtODE4NS00YjEzLWI0OWQtMjUxZmU3MTIwODVk");
+            //request.AddJsonBody(obj);
+
+            var json = request.JsonSerializer.Serialize(obj);
+
+            request.AddParameter("application/json; charset=utf-8", json, ParameterType.RequestBody);
+
+            //request.JsonSerializer.Serialize(obj);
+
+            //request.AddObject(obj);
 
             PostChallenge challenge = new PostChallenge();
 
