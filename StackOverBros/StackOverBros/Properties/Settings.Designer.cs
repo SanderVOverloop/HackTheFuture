@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HTF_StackOverBros.Properties
+namespace StackOverBros.Properties
 {
 
 

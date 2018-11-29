@@ -1,7 +1,7 @@
-﻿<Application x:Class="HTF_StackOverBros.App"
+﻿<Application x:Class="StackOverBros.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:HTF_StackOverBros"
+             xmlns:local="clr-namespace:StackOverBros"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          
