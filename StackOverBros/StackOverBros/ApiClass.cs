@@ -10,39 +10,46 @@ namespace StackOverBros
 {
     class ApiClass
     {
-        private const string URL = "https://sub.domain.com/objects.json";
-        private string urlParameters = "?api_key=123";
+        var client = new RestClient("http://example.com");
+        // client.Authenticator = new HttpBasicAuthenticator(username, password);
 
-        static void Main(string[] args)
-        {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(URL);
+        var request = new RestRequest("resource/{id}", Method.POST);
+        request.AddParameter("name", "value"); // adds to POST or URL querystring based on Method
+request.AddUrlSegment("id", "123"); // replaces matching token in request.Resource
 
-            // Add an Accept header for JSON format.
-            client.DefaultRequestHeaders.Accept.Add(
-            new MediaTypeWithQualityHeaderValue("application/json"));
-            new MediaTypeWithQualityHeaderValue("ZGJkOWZjOGUtODE4NS00YjEzLWI0OWQtMjUxZmU3MTIwODVk");
+// add parameters for all properties on an object
+request.AddObject(object);
 
-            // List data response.
-            HttpResponseMessage response = client.GetAsync(urlParameters).Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
-            if (response.IsSuccessStatusCode)
-            {
-                // Parse the response body.
-                var dataObjects = response.Content.ReadAsAsync<IEnumerable<DataObject>>().Result;  //Make sure to add a reference to System.Net.Http.Formatting.dll
-                foreach (var d in dataObjects)
-                {
-                    Console.WriteLine("{0}", d.Name);
-                }
-            }
-            else
-            {
-                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
-            }
+// or just whitelisted properties
+request.AddObject(object, "PersonId", "Name", ...);
 
-            //Make any other calls using HttpClient here.
+// easily add HTTP Headers
+request.AddHeader("header", "value");
 
-            //Dispose once all HttpClient calls are complete. This is not necessary if the containing object will be disposed of; for example in this case the HttpClient instance will be disposed automatically when the application terminates so the following call is superfluous.
-            client.Dispose();
-        }
+// add files to upload (works with compatible verbs)
+request.AddFile("file", path);
+
+// execute the request
+IRestResponse response = client.Execute(request);
+        var content = response.Content; // raw content as string
+
+        // or automatically deserialize result
+        // return content type is sniffed but can be explicitly set via RestClient.AddHandler();
+        IRestResponse<Person> response2 = client.Execute<Person>(request);
+        var name = response2.Data.Name;
+
+        // or download and save file to disk
+        client.DownloadData(request).SaveAs(path);
+
+        // easy async support
+        await client.ExecuteAsync(request);
+
+        // async with deserialization
+        var asyncHandle = client.ExecuteAsync<Person>(request, response => {
+            Console.WriteLine(response.Data.Name);
+        });
+
+        // abort the request on demand
+        asyncHandle.Abort();
     }
 }
