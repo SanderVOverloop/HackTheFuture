@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace StackOverBros2.Objects
 {
+    public class PostObject
+    {
+        public string id { get; set; }
+        public List<InputValue> values { get; set; }
+    }
+
     public class InputValue
     {
         public string name { get; set; }

@@ -13,6 +13,7 @@ namespace StackOverBros2.Challenge_Classes
         public IRestResponse<GetChallenge> ApiGet(string id)
         {
             var baseurl = "http://htf2018.azurewebsites.net/";
+
             var client = new RestClient();
             client.BaseUrl = new System.Uri(baseurl);
 
@@ -22,14 +23,25 @@ namespace StackOverBros2.Challenge_Classes
             GetChallenge challenge = new GetChallenge();
 
             IRestResponse<GetChallenge> response = client.Execute<GetChallenge>(request);
-            string titel = response.Data.title;
 
             return response;
         }
 
-        public void ApiPost()
+        public IRestResponse<PostChallenge> ApiPost(int id)
         {
-            
+            var baseurl = "http://htf2018.azurewebsites.net/";
+
+            var client = new RestClient();
+            client.BaseUrl = new System.Uri(baseurl);
+
+            var request = new RestRequest(String.Format("challenges/{0}", id), Method.POST);
+            request.AddHeader("htf-identification", "ZGJkOWZjOGUtODE4NS00YjEzLWI0OWQtMjUxZmU3MTIwODVk");
+
+            PostChallenge challenge = new PostChallenge();
+
+            IRestResponse<PostChallenge> response = client.Execute<PostChallenge>(request);
+
+            return response;
         }
     }
 }
