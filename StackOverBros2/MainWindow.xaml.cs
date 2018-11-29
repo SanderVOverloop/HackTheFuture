@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,33 +29,45 @@ namespace StackOverBros2
             InitializeComponent();
         }
 
-        int x = 2;
-        /*private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }*/
+        private int x = 2;
+        private List<Challenge> challenges = new List<Challenge>();
+        private ApiClass apiClass = new ApiClass();
 
         private void Challenge2()
         {
+            btn_complete.IsEnabled = false;
             string id = "593bc0a2e0dfdc53b239bc2a96ab0fd5";
-            ApiClass apiClass = new ApiClass();
+            
             IRestResponse<GetChallenge> response = apiClass.ApiGet(id);
             
             int sum = 0;
             foreach(InputValue i in response.Data.question.inputValues)
             {
                 sum += int.Parse(i.data);
-                Console.WriteLine(i.data);
             }
+            InputValue answer = new InputValue();
+            answer.name = "sum";
+            answer.data = sum.ToString();
+            List<InputValue> values = new List<InputValue>();
+            values.Add(answer);
+            Thread.Sleep(10000);
+            IRestResponse<PostChallenge> postResponse = apiClass.ApiPost(response.Data.id, id, values);
 
-            Console.WriteLine(sum);
-
+            
+            challenges.Add(new Challenge { Name = postResponse.Data.identifier, Completion = postResponse.Data.status });
+            list_challenges.ItemsSource = challenges;
+            
+            Thread.Sleep(10000);
+            btn_complete.IsEnabled = true;
 
         }
 
         private void Challenge4()
         {
+            btn_complete.IsEnabled = false;
+
             string id = "7a34919d6dd4c2d9c3f05c6957946b82";
+            IRestResponse<GetChallenge> response = apiClass.ApiGet(id);
 
             int start = 0;
             int stop = 1;
@@ -74,6 +87,12 @@ namespace StackOverBros2
                 if (control == 0 && num != 1)
                     Console.Write("{0} ", num);
             }
+
+
+            challenges.Add(new Challenge { Name = postResponse.Data.identifier, Completion = postResponse.Data.status });
+            list_challenges.ItemsSource = challenges;
+            Thread.Sleep(10000);
+            btn_complete.IsEnabled = true;
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -88,6 +107,13 @@ namespace StackOverBros2
                     break;
 
             }
+        }
+
+        public class Challenge
+        {
+            public string Name { get; set; }
+
+            public string Completion { get; set; }
         }
     }
 }
