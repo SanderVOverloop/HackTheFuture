@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace StackOverBros.Properties
+namespace StackOverBros2.Properties
 {
 
 
