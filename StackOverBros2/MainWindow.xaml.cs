@@ -96,6 +96,37 @@ namespace StackOverBros2
             btn_complete.IsEnabled = true;
         }
 
+        private void Challenge5()
+        {
+            btn_complete.IsEnabled = false;
+            string id = "d230ea19237b0b1ba70e5464f00c4717";
+
+            IRestResponse<GetChallenge> response = apiClass.ApiGet(id);
+
+            //TODO: Code for the Challenge
+            int sum = 0;
+            foreach (InputValue i in response.Data.question.inputValues)
+            {
+                sum += int.Parse(i.data);
+            }
+
+            InputValue answer = new InputValue();
+            answer.name = "sum";
+            answer.data = sum.ToString();
+            List<InputValue> values = new List<InputValue>();
+            values.Add(answer);
+            Console.WriteLine(response.Data.id);
+            Thread.Sleep(10000);
+            IRestResponse<PostChallenge> postResponse = apiClass.ApiPost(response.Data.id, id, values);
+
+
+            challenges.Add(new Challenge { Name = postResponse.Data.identifier, Completion = postResponse.Data.status });
+            list_challenges.ItemsSource = challenges;
+
+            Thread.Sleep(10000);
+            btn_complete.IsEnabled = true;
+        }
+
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             switch (x)
