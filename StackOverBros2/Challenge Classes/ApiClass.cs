@@ -27,14 +27,14 @@ namespace StackOverBros2.Challenge_Classes
             return response;
         }
 
-        public IRestResponse<PostChallenge> ApiPost(string id, List<InputValue> values)
+        public IRestResponse<PostChallenge> ApiPost(string challengeId, string id, List<InputValue> values)
         {
             var baseurl = "http://htf2018.azurewebsites.net/";
 
             var client = new RestClient();
             client.BaseUrl = new System.Uri(baseurl);
 
-            var request = new RestRequest(String.Format("challenges/{0}", id), Method.POST);
+            var request = new RestRequest(String.Format("challenges/{0}", challengeId), Method.POST);
 
             PostObject obj = new PostObject();
             obj.id = id;
