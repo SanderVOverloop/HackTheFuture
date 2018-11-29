@@ -34,12 +34,12 @@ namespace StackOverBros2.Challenge_Classes
             var client = new RestClient();
             client.BaseUrl = new System.Uri(baseurl);
 
+            var request = new RestRequest(String.Format("challenges/{0}", id), Method.POST);
             request.AddHeader("Content-type", "application/json");
             request.AddHeader("htf-identification", "ZGJkOWZjOGUtODE4NS00YjEzLWI0OWQtMjUxZmU3MTIwODVk");
-            var request = new RestRequest(String.Format("challenges/{0}", id), Method.POST);
 
             PostObject obj = new PostObject();
-            obj.id = challengeId;
+            obj.challengeId = challengeId;
             obj.values = values;
 
             //request.AddJsonBody(obj);

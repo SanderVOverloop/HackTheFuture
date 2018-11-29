@@ -8,7 +8,7 @@ namespace StackOverBros2.Objects
 {
     public class PostObject
     {
-        public string id { get; set; }
+        public string challengeId { get; set; }
         public List<InputValue> values { get; set; }
     }
 

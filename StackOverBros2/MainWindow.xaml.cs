@@ -50,6 +50,7 @@ namespace StackOverBros2
             answer.data = sum.ToString();
             List<InputValue> values = new List<InputValue>();
             values.Add(answer);
+            Console.WriteLine(response.Data.id);
             Thread.Sleep(10000);
             IRestResponse<PostChallenge> postResponse = apiClass.ApiPost(response.Data.id, id, values);
 
@@ -89,7 +90,7 @@ namespace StackOverBros2
             }
 
 
-            challenges.Add(new Challenge { Name = postResponse.Data.identifier, Completion = postResponse.Data.status });
+            //challenges.Add(new Challenge { Name = postResponse.Data.identifier, Completion = postResponse.Data.status });
             list_challenges.ItemsSource = challenges;
             Thread.Sleep(10000);
             btn_complete.IsEnabled = true;
