@@ -24,5 +24,57 @@ namespace StackOverBros2
         {
             InitializeComponent();
         }
+
+        int x = 2;
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            switch(x)
+            {
+                case 2:
+                    Challenge2();
+                    break;
+                case 4:
+                    Challenge4();
+                    break;
+
+            }
+        }
+
+        private void Challenge2()
+        {
+            string id = "593bc0a2e0dfdc53b239bc2a96ab0fd5";
+
+            int sum = 0;
+            foreach(int i in inputValues.data)
+            {
+                sum += i;   
+            }
+
+
+        }
+
+        private void Challenge4()
+        {
+            string id = "7a34919d6dd4c2d9c3f05c6957946b82";
+
+            int start = 0;
+            int stop = 1;
+            for (int num = start; num <= stop; num++)
+            {
+                int control = 0;
+
+                for (int i = 2; i <= num / 2; i++)
+                {
+                    if (num % i == 0)
+                    {
+                        control++;
+                        break;
+                    }
+                }
+
+                if (control == 0 && num != 1)
+                    Console.Write("{0} ", num);
+            }
+        }
     }
 }
