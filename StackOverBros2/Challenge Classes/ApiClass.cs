@@ -42,16 +42,9 @@ namespace StackOverBros2.Challenge_Classes
             obj.challengeId = challengeId;
             obj.values = values;
 
-            //request.AddJsonBody(obj);
-
             var json = request.JsonSerializer.Serialize(obj);
 
             request.AddParameter("application/json; charset=utf-8", json, ParameterType.RequestBody);
-
-            //request.JsonSerializer.Serialize(obj);
-
-            //request.AddObject(obj);
-
             PostChallenge challenge = new PostChallenge();
 
             IRestResponse<PostChallenge> response = client.Execute<PostChallenge>(request);
