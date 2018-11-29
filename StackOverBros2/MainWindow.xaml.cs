@@ -45,10 +45,10 @@ namespace StackOverBros2
             string id = "593bc0a2e0dfdc53b239bc2a96ab0fd5";
 
             int sum = 0;
-            foreach(int i in inputValues.data)
+            /*foreach(int i in inputValues.data)
             {
                 sum += i;   
-            }
+            }*/
 
 
         }
