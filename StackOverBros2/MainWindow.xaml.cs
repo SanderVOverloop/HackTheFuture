@@ -32,6 +32,8 @@ namespace StackOverBros2
         private int x = 2;
         private List<Challenge> challenges = new List<Challenge>();
         private ApiClass apiClass = new ApiClass();
+        private InputValue answer = new InputValue();
+        private List<InputValue> values = new List<InputValue>();
 
         private void Challenge2()
         {
@@ -45,7 +47,7 @@ namespace StackOverBros2
             {
                 sum += int.Parse(i.data);
             }
-            InputValue answer = new InputValue();
+
             answer.name = "sum";
             answer.data = sum.ToString();
             List<InputValue> values = new List<InputValue>();
@@ -72,6 +74,17 @@ namespace StackOverBros2
 
             int start = 0;
             int stop = 1;
+            foreach (InputValue i in response.Data.question.inputValues)
+            {
+                if(i.name == "start")
+                {
+                    start = int.Parse(i.data);
+                }
+                else if(i.name == "stop")
+                {
+                    stop = int.Parse(i.data);
+                }
+            }
             for (int num = start; num <= stop; num++)
             {
                 int control = 0;
@@ -86,11 +99,21 @@ namespace StackOverBros2
                 }
 
                 if (control == 0 && num != 1)
-                    Console.Write("{0} ", num);
+                    answer.name = "prime";
+                    answer.data = num.ToString();
+                    values.Add(answer);
             }
 
+            
+            
+            
+            Console.WriteLine(response.Data.id);
+            Thread.Sleep(10000);
+            IRestResponse<PostChallenge> postResponse = apiClass.ApiPost(response.Data.id, id, values);
 
-            //challenges.Add(new Challenge { Name = postResponse.Data.identifier, Completion = postResponse.Data.status });
+
+
+            challenges.Add(new Challenge { Name = postResponse.Data.identifier, Completion = postResponse.Data.status });
             list_challenges.ItemsSource = challenges;
             Thread.Sleep(10000);
             btn_complete.IsEnabled = true;
