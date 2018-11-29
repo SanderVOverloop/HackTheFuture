@@ -1,0 +1,87 @@
+{
+    "identifier": "Challenge01",
+    "status": "Successful",
+    "identification": "ZGJkOWZjOGUtODE4NS00YjEzLWI0OWQtMjUxZmU3MTIwODVk",
+    "overview": {
+        "challenge01": {
+            "status": "Successful",
+            "entry": "htf2018.azurewebsites.net/challenges"
+        },
+        "challenge02": {
+            "status": "Unsuccessful",
+            "entry": "htf2018.azurewebsites.net/challenges/593bc0a2e0dfdc53b239bc2a96ab0fd5"
+        },
+        "challenge03": {
+            "status": "Unsuccessful",
+            "entry": "htf2018.azurewebsites.net/challenges/5be0b78cc8dc68e6009a8b6fd347a819"
+        },
+        "challenge04": {
+            "status": "Unsuccessful",
+            "entry": "htf2018.azurewebsites.net/challenges/7a34919d6dd4c2d9c3f05c6957946b82"
+        },
+        "challenge05": {
+            "status": "Unsuccessful",
+            "entry": "htf2018.azurewebsites.net/challenges/d230ea19237b0b1ba70e5464f00c4717"
+        },
+        "challenge06": {
+            "status": "Unsuccessful",
+            "entry": "htf2018.azurewebsites.net/challenges/c75839cd76514443767d923aec1f70cd"
+        },
+        "challenge07": {
+            "status": "Unsuccessful",
+            "entry": "htf2018.azurewebsites.net/challenges/d4f42d4a44dd5b2ed194f6fe984a5550"
+        },
+        "challenge08": {
+            "status": "Unsuccessful",
+            "entry": "htf2018.azurewebsites.net/challenges/6451359698245e2b02bdf79d5f99fe5b"
+        },
+        "challenge09": {
+            "status": "Unsuccessful",
+            "entry": "htf2018.azurewebsites.net/challenges/8d77e8f00e8e2ca67edcb07e90fb82fc"
+        },
+        "challenge10": {
+            "status": "Unsuccessful",
+            "entry": "htf2018.azurewebsites.net/challenges/18d6f305c2117e547b2684ba5d75ecfd"
+        },
+        "challenge11": {
+            "status": "Unsuccessful",
+            "entry": "htf2018.azurewebsites.net/challenges/b06beea905395dc59506f113cd35b1a5"
+        },
+        "challenge12": {
+            "status": "Unsuccessful",
+            "entry": "htf2018.azurewebsites.net/challenges/4398b12328658b0dc52ab04ffd5e3fc2"
+        },
+        "challenge13": {
+            "status": "Unsuccessful",
+            "entry": "htf2018.azurewebsites.net/challenges/a07f68910899dfb89f04ca604cb8167a"
+        },
+        "challenge14": {
+            "status": "Unsuccessful",
+            "entry": "htf2018.azurewebsites.net/challenges/5b7b62e956578da3902d695c57c1b8e4"
+        },
+        "challenge15": {
+            "status": "Unsuccessful",
+            "entry": "htf2018.azurewebsites.net/challenges/57ba93bead947fbdc044646cf2fa0d2e"
+        },
+        "challenge16": {
+            "status": "Unsuccessful",
+            "entry": "htf2018.azurewebsites.net/challenges/30668de5857704bdf1e620cfb99fef51"
+        },
+        "challenge17": {
+            "status": "Unsuccessful",
+            "entry": "htf2018.azurewebsites.net/challenges/979ab0a499a9106c36d2fe67fa5451d0"
+        },
+        "challenge18": {
+            "status": "Unsuccessful",
+            "entry": "htf2018.azurewebsites.net/challenges/6927686b0e1775a4a332e708cc13108f"
+        },
+        "challenge19": {
+            "status": "Unsuccessful",
+            "entry": "htf2018.azurewebsites.net/challenges/79d29b30c814b4abbd1c55428a5809fc"
+        },
+        "challenge20": {
+            "status": "Unsuccessful",
+            "entry": "htf2018.azurewebsites.net/challenges/0d530b3ed440a3e61499877d626bc7fa"
+        }
+    }
+}
