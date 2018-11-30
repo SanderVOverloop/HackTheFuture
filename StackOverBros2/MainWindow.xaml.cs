@@ -139,7 +139,9 @@ namespace StackOverBros2
             IRestResponse<GetChallenge> response = apiClass.ApiGet(id);
 
             //TODO: Code for the Challenge
-            double sec = 0;
+            double time = 0;
+            double endtime = 0;
+            double eath = 0;
             string planet = "";
 
             foreach (InputValue i in response.Data.question.inputValues)
@@ -147,21 +149,26 @@ namespace StackOverBros2
                 switch (i.name)
                 {
                     case "ageInUniversalSeconds":
-                        sec = double.Parse(i.data);
+                        time = long.Parse(i.data);
                         break;
                     case "destinationPlanet":
                         planet = i.data;
                         break;
+                    case "EarthSolarYear":
+                        eath = long.Parse(i.data);
+                        break;
                     default:
                         if (i.name.ToUpper().Contains(planet.ToUpper()))
                         {
-                            sec = sec / int.Parse(i.data);
+                            endtime = time / eath / double.Parse(i.data.Replace(".",","));
+                            Console.WriteLine("Jeeejjj");
+                            continue;
                         }
                         break;
                 }
             }
             answer.name = "ageInYears";
-            answer.data = Math.Round(sec, 2).ToString();
+            answer.data = Math.Round(endtime, 2).ToString();
 
             values.Add(answer);
             Console.WriteLine(response.Data.id);
@@ -185,7 +192,8 @@ namespace StackOverBros2
         {
             //Challenge2();
             //Thread.Sleep(10000);
-            Challenge4();
+            //Challenge4();
+            Challenge5();
         }
 
         public class Challenge
